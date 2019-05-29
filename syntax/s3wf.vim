@@ -16,3 +16,6 @@ highlight default link S3wfCharaId Keyword
 highlight default link S3wfCharaColor Underlined
 highlight default link S3wfCharaDef Special
 highlight default link S3wfTitle Title
+
+" Dynamic definitions ------------------------------------------
+call s3wf#register_highlights()

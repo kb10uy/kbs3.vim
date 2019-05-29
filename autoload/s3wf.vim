@@ -1,6 +1,7 @@
 function! s3wf#update_highlights() abort
   call s3wf#clear_highlights()
   call s3wf#set_highlights()
+  call s3wf#register_highlights()
 endfunction
 
 function! s3wf#set_highlights() abort
@@ -14,13 +15,20 @@ function! s3wf#set_highlights() abort
       break
     endif
 
-    let groupname = 'S3wfRuntime_Character' . ln
-    exec 'syntax match ' . groupname . ' /\v^\@' . matches[1] . '\>.+$/'
-    exec 'highlight ' . groupname . ' guifg=' . matches[2]
-
     let b:s3wf_names[ln] = [matches[1], matches[2], matches[3]]
     let ln = ln + 1
   endwhile
+endfunction
+
+function! s3wf#register_highlights() abort
+  if !exists('b:s3wf_names')
+    return
+  endif
+  for k in keys(b:s3wf_names)
+    let groupname = 'S3wfRuntime_Character' . k
+    exec 'syntax match ' . groupname . ' /\v^\@' . b:s3wf_names[k][0] . '\>.+$/'
+    exec 'highlight ' . groupname . ' guifg=' . b:s3wf_names[k][1]
+  endfor
 endfunction
 
 function! s3wf#clear_highlights() abort
