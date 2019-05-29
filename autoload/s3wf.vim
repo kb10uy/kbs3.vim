@@ -12,7 +12,7 @@ function! s3wf#update_conceal() abort
 
     let groupname = 'S3wfRuntime_Character' . ln
     let syndef = 'syntax match ' . groupname . ' /\v^\@' . matches[1] . '\>.+$/'
-    let hidef = 'highlight ' . 'groupname' . 'guifg=' . matches[2]
+    let hidef = 'highlight ' . groupname . ' guifg=' . matches[2]
     exec syndef
     exec hidef
 
