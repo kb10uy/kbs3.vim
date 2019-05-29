@@ -8,7 +8,7 @@ function! s3wf#update_conceal() abort
     if empty(matches)
       break
     endif
-    let s3wf_names[i] = [matches[1], matches[2], matches[3]]
+    let b:s3wf_names[i] = [matches[1], matches[2], matches[3]]
 
     let groupname = 'S3wfRuntime_Character' . i
     let syndef = 'syntax match ' . groupname . ' /\v^\@' . matches[1] . '\>.+$/'
