@@ -1,2 +1,1 @@
-autocmd BufRead,BufNewFile *.s3wf
-      \ set filetype=s3wf
+autocmd BufRead,BufNewFile *.s3wf set filetype=s3wf
