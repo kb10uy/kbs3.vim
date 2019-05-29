@@ -16,6 +16,6 @@ function! s3wf#update_conceal() abort
     exec syndef
     exec hidef
 
-    let i = i + 1
+    let ln = ln + 1
   endwhile
 endfunction
