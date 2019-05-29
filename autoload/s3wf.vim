@@ -1,4 +1,9 @@
-function! s3wf#update_conceal() abort
+function! s3wf#update_highlights() abort
+  call s3wf#clear_highlights()
+  call s3wf#set_highlights()
+endfunction
+
+function! s3wf#set_highlights() abort
   let b:s3wf_names = {}
   let lastline = line('$')
   let ln = 1
@@ -8,14 +13,23 @@ function! s3wf#update_conceal() abort
     if empty(matches)
       break
     endif
-    let b:s3wf_names[ln] = [matches[1], matches[2], matches[3]]
 
     let groupname = 'S3wfRuntime_Character' . ln
-    let syndef = 'syntax match ' . groupname . ' /\v^\@' . matches[1] . '\>.+$/'
-    let hidef = 'highlight ' . groupname . ' guifg=' . matches[2]
-    exec syndef
-    exec hidef
+    exec 'syntax match ' . groupname . ' /\v^\@' . matches[1] . '\>.+$/'
+    exec 'highlight ' . groupname . ' guifg=' . matches[2]
 
+    let b:s3wf_names[ln] = [matches[1], matches[2], matches[3]]
     let ln = ln + 1
   endwhile
+endfunction
+
+function! s3wf#clear_highlights() abort
+  if !exists('b:s3wf_names')
+    return
+  endif
+  for k in keys(b:s3wf_names)
+    let groupname = 'S3wfRuntime_Character' . k
+    exec 'syntax clear ' . groupname
+    exec 'hi clear ' . groupname
+  endfor
 endfunction
